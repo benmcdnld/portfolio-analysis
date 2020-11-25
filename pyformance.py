@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def perf_summary(df, bm_col=1, rf_col=-1, save=False):
+def perf_summary(df, bm_col=1, rf_col=None, save=False):
     '''
     Takes a df of returns (% form), optional benchmark column number, option risk free
     columns number, and optional boolean to save results in excel workbook.
@@ -44,7 +44,10 @@ def perf_summary(df, bm_col=1, rf_col=-1, save=False):
 
         max_dd.append((1 - min(dd)) * -100)
 
-    ann_ex_ret_cp = (df.sub(df.iloc[:, rf_col], axis=0) / 100 + 1).cumprod()
+    if rf_col:
+        ann_ex_ret_cp = (df.sub(df.iloc[:, rf_col], axis=0) / 100 + 1).cumprod()
+    else:
+        ann_ex_ret_cp = (df / 100 + 1).cumprod()
 
     sharpe = [
         (np.power(ann_ex_ret_cp[c][-1], 12 / ann_ex_ret_cp.shape[0]) - 1) * 100 / sd
@@ -176,3 +179,4 @@ def add_dd(dd_df, ret_df, col_num):
     ]
 
     return dd_df
+
