@@ -131,13 +131,24 @@ for category in 'Index Fund Alt'.split():
 
     beta_df = pd.concat([beta_df, df], sort=False)
 
-beta_df.to_excel(f'{date} - TEST Macro Betas.xlsx')
+path = r'O:\Investment Research\Ben\Tools and Concepts WIP\Macro Factors'
+
+beta_df.to_excel(path + f'\Macro Betas.xlsx')
+
+import os
+newpath = r'O:\Investment Research\Ben\Tools and Concepts WIP\Macro Factors\\' + date
+if not os.path.exists(newpath):
+    os.makedirs(newpath)
+
+beta_df.to_excel(newpath + f'\ {date} - Macro Betas.xlsx')
+
+
 
 excess_returns_df.sort_index(inplace=True)
 predict_df.sort_index(inplace=True)
 error_df.sort_index(inplace=True)
 
-excess_returns_df.to_excel(f'{date} - Excess Returns.xlsx')
-predict_df.to_excel(f'{date} - Model Predictions.xlsx')
-error_df.to_excel(f'{date} - Errors.xlsx')
-# error_df.corr().to_excel(f'{date} - TEST Macro Error Correlation.xlsx')
+excess_returns_df.to_excel(newpath + f'\ {date} - Excess Returns.xlsx')
+predict_df.to_excel(newpath + f'\ {date} - Model Predictions.xlsx')
+error_df.to_excel(newpath + f'\ {date} - Errors.xlsx')
+error_df.corr().to_excel(newpath + f'\ {date} - Macro Error Correlation.xlsx')
