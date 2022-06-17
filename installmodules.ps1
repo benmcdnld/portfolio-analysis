@@ -6,4 +6,4 @@ pip install lxml
 pip install bs4
 pip install statsmodels
 pip install sklearn
-pip install DatastreamDSWS
+pip install openpyxl
