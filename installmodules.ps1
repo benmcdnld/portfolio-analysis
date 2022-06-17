@@ -7,3 +7,4 @@ pip install bs4
 pip install statsmodels
 pip install sklearn
 pip install openpyxl
+pip install seaborn
